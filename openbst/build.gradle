@@ -63,14 +63,3 @@ jlink {
     }
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
 }
-
-prepareMergedJarsDir.doLast {
-    def mjDir = mergedJarsDir.get().asFile
-    copy {
-        from "$mjDir/META-INF/versions/9"
-        into mjDir
-        exclude '**/module-info.class'
-    }
-    file("$mjDir/META-INF/versions").deleteDir()
-    delete("$mjDir/META-INF/MANIFEST.MF")
-}
